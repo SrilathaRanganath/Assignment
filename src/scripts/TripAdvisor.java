@@ -21,8 +21,6 @@ public class TripAdvisor extends generic.Generic_Methods  implements generic.Con
 		public void ratingsForClubMahindra() throws InterruptedException, FileNotFoundException, IOException
 		{
 	        
-			
-		  
 			//Launch TripAdvisor Application 
 			String tripadvisorurl=Property.get_Property(PropertyFile_PATH, "tripadvisorurl");
 			System.out.println(tripadvisorurl);
@@ -47,68 +45,33 @@ public class TripAdvisor extends generic.Generic_Methods  implements generic.Con
 		  	System.out.println("clicked on first result");
 		  	Thread.sleep(5000);
 			
-			Set<String> tabs = driver.getWindowHandles();
-			ArrayList<String> atabs = new ArrayList<String>(tabs);
+			Set<String> alltabs = driver.getWindowHandles();
+			ArrayList<String> arraytabs = new ArrayList<String>(alltabs);
+			String hotelreviewtab = arraytabs.get(1);
+			String hreviewtabtitle = driver.switchTo().window(hotelreviewtab).getTitle();
 			
-			String wh = atabs.get(1);
-		    Thread.sleep(2000);
-			String windowTitle = driver.switchTo().window(wh).getTitle();
-			System.out.println(windowTitle);
-			if(windowTitle.contains("Review"))
-			    {
-					System.out.println(windowTitle+"Page is displayed");
-					TripAdvisor_HotelReview_Page taHotelReviewPage = new TripAdvisor_HotelReview_Page(driver);
-					taHotelReviewPage.clickOnWriteReviewButton(driver);
+			
+			TripAdvisor_HotelReview_Page taHotelReviewPage = new TripAdvisor_HotelReview_Page(driver);
+			taHotelReviewPage.clickOnWriteReviewButton(driver);
 					
-					Thread.sleep(5000);
+			Thread.sleep(5000);
 					
-					Set<String> childtabs = driver.getWindowHandles();
-					ArrayList<String> childatabs = new ArrayList<String>(childtabs);
-					System.out.println(childatabs);
-					String childwh = childatabs.get(2);
-				    Thread.sleep(2000);
-					String childwindowTitle = driver.switchTo().window(childwh).getTitle();
-					System.out.println(childwindowTitle);
+			Set<String> totaltabs = driver.getWindowHandles();
+			ArrayList<String> arraytotaltabs = new ArrayList<String>(totaltabs);
+			String ratingtab = arraytotaltabs.get(2);
+			String ratingtabtitle = driver.switchTo().window(ratingtab).getTitle();
 					
-							TripAdvisor_Ratings_Page taratings=new TripAdvisor_Ratings_Page(driver);
-							taratings.selectRating(driver);
-		 
+			TripAdvisor_Ratings_Page taratings=new TripAdvisor_Ratings_Page(driver);
+			taratings.selectRating(driver);
+			taratings.enterReviewTitle("Some Title");
+			taratings.enterReview("Some Review");
+			taratings.clickOnServiceRating(driver);
 					
 					
-				}
-				
-	
-			
-			/*Iterator<String> itr = tabs.iterator();
-			
-			String prnt = itr.next();
-			String child = itr.next();
-			driver.switchTo().window(child);
-			
-			Review r=new Review(driver);
-			
-			r.clickReview(driver);
-			Thread.sleep(2000);
-	        Set<String> tabs1 = driver.getWindowHandles();
-			
-			Iterator<String> itr1 = tabs1.iterator();
-			
-			String prnt1 = itr1.next();
-			String child1 = itr1.next();
-			String child2=itr1.next();
-			driver.switchTo().window(child2);
-			
-			
-			Rating R=new Rating(driver);
-			
-			R.selectRating(driver);
-			R.reviewTitle("Place to visit");
-			R.urReview("Good place");
-			R.servicerating(driver);*/
-		   
 		}
+				
+ }
 
-	}
 
 
 

@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TripAdvisor_Home_Page {
 	
-public WebDriver driver;
-	
+
     @FindBy(xpath="//span[.='Search']")
 	private WebElement searchicon;
     

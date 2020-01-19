@@ -4,6 +4,7 @@
   <test name="Test">
     <classes>
       <class name="scripts.ComparePrice"/>
+      <class name="scripts.TripAdvisor"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
